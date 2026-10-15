@@ -1,5 +1,6 @@
 #include "project/recursive_algorithms.h"
 
+#include <iostream>
 #include <stdexcept>
 #include <utility>
 #include <vector>
@@ -7,45 +8,83 @@
 // TODO: Implement factorial recursively.
 // Base case: n == 0 or n == 1.
 // Recursive case: n * factorial(n - 1).
+// Time complexity: O(n)
 int factorial(int n) {
-    (void)n;
-    throw std::logic_error("Student implementation required: factorial");
+    if(n < 0) { throw std::logic_error("Error: Please input a non-negative number"); }
+    else {
+        if(n == 0) { return 1; }
+        else return n * factorial(n-1);
+    }
 }
 
 // TODO: Implement an iterative factorial comparison.
 int factorialIterative(int n) {
-    (void)n;
-    throw std::logic_error("Student implementation required: factorialIterative");
+    if(n < 0) { throw std::logic_error("Error: Please input a non-negative number"); }
+    else {
+        int total = 1;
+        while (n > 0) {
+            total *= n;
+            n-=1;
+        }
+        return total;
+    }
 }
 
 // TODO: Implement fibonacci recursively.
 // Base case: fib(0) = 0, fib(1) = 1.
 // Recursive case: fib(n) = fib(n - 1) + fib(n - 2).
 int fibonacci(int n) {
-    (void)n;
-    throw std::logic_error("Student implementation required: fibonacci");
+    if(n < 0) { throw std::logic_error("Error: Please input a non-negative number"); }
+    if(n <= 1) { return (n); }
+    else {
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
 }
 
 // TODO: Implement iterative fibonacci comparison.
 int fibonacciIterative(int n) {
-    (void)n;
-    throw std::logic_error("Student implementation required: fibonacciIterative");
+    if(n < 0) { throw std::logic_error("Error: Please input a non-negative number"); }
+    int current = 0;
+    int prev = 1;
+    int temp = 0;
+    for(int i = 0; i < n; i++) {
+        temp = current;
+        current += prev; 
+        prev = temp;
+    }
+    return current;
 }
 
 // TODO: Implement recursive binary search on a sorted array.
 // Base case: target not found or left > right.
 // Recursive case: compare middle element and recurse on the appropriate half.
 int binarySearch(const std::vector<int>& array, int target) {
-    (void)array;
-    (void)target;
-    throw std::logic_error("Student implementation required: binarySearch");
+    int mid = array.size()/2;
+    int start = 0;
+    int end = array.size()-1;
+    if(array.at(mid) == target) { return mid; }
+    
+    
+    if(array.at(mid) > target) { 
+        end = mid - 1;
+        if(start > end) { return -1; }
+        std::vector<int> temp_arr(array.begin() + start, array.begin() + end);
+        return binarySearch(temp_arr, target);
+    }
+    else {
+        start = mid + 1;
+        if(start > end) { return -1; }
+        std::vector<int> temp_arr(array.begin() + start, array.begin() + end);
+        return binarySearch(temp_arr, target);
+    }
+
+    
+    return(array)
 }
 
 // TODO: Implement iterative binary search comparison.
 int binarySearchIterative(const std::vector<int>& array, int target) {
-    (void)array;
-    (void)target;
-    throw std::logic_error("Student implementation required: binarySearchIterative");
+
 }
 
 // TODO: Implement recursive array sum.
